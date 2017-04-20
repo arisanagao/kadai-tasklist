@@ -10,15 +10,26 @@
     <tbody>
       <% tasks.each do |task| %>
         <tr>
+          <% if current_user == user %>
           <td><%= link_to task.id, task %></td>
+          <% else %>
+          <td><%= task.id %></td>
+          <% end %>
+          
           <td><%= task.content %></td>
           <td><%= task.status %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  
+  <% if current_user == user %>
+  <%= link_to '新規タスクの投稿', new_task_path, class: "btn btn-primary" %>
+  <% end %>
 
   <div>
     <%= paginate tasks %>
-    <%= link_to '新規タスクの投稿', new_task_path, class: "btn btn-primary" %>
+
+    
+
   </div>

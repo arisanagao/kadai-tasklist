@@ -7,9 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @task = current_user.tasks.build  # form_for 用
-    @tasks = current_user.tasks.order('created_at DESC').page(params[:page])
-      
+    @tasks = @user.tasks.order('created_at DESC').page(params[:page])
       
   end
 

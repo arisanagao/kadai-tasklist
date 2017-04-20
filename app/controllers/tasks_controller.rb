@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
    before_action :require_user_logged_in
  before_action :set_task, only: [:show, :edit, :update, :destroy]
-   before_action :correct_user, only: [:destroy]
+   before_action :correct_user, only: [:destroy, :edit]
 
 
  def index
@@ -30,7 +30,9 @@ class TasksController < ApplicationController
 	end
 	
 	def edit
+ return redirect_to :root if @task.nil?
 	end
+ 	
  	
  	def update
  	  if @task.update(task_params)
@@ -43,12 +45,12 @@ class TasksController < ApplicationController
  	end  
  
   def destroy
-    @task.destroy
-    flash[:success] = 'タスク は正常に削除されました'
+   return redirect_to :root if @task.nil?
+   @task.destroy
+     flash[:success] = 'タスク は正常に削除されました'
     #redirect_to tasks_url
      redirect_to root_path
   end
-
  
  private
  
